@@ -40,3 +40,10 @@ the number of news showing in the chart.
 pools; the total amount of miners’ rewards (default) or the total number of miner addresses.
 – Interaction: Analysts can hover over the flow or stacked bars to see the exact value.
 
+# How to run?
+- close repository
+- Open a terminal window of the root directory.
+- Execute the command to start the server.
+- Python 2 — python -m SimpleHTTPServer 8000
+- Python 3 — python -m http.server 8000
+- Then open a web browser at http://localhost:8000/

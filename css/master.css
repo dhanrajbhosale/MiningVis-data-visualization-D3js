@@ -1,0 +1,380 @@
+.myContainer {
+    margin: auto;
+    width: 1590px;
+    background-color: shadow-sm;
+    padding: 10px;
+    }
+    #timeline_div {
+    float: center;
+    padding: 10px;
+    position: relative;
+    margin-bottom: 10px;
+    }
+    #Statistics_div {
+        float: left;
+        width:100px;
+        padding: 10px;
+        }
+    #universal_legend_div {
+    float: left;
+    width: 170px;
+    height: 849px;
+    padding: top right bottom left;
+    padding: 10px;
+    position: relative;
+    margin-bottom: 10px;
+    }
+    #stacked_bar_div {
+    float: left;
+    width: 500px;
+    height: 470px;
+    padding: 10px;
+    margin-left: 19px;
+    /*overflow: hidden;*/
+    position: relative;
+    margin-bottom: 10px;
+    }
+    #ribbon_div
+    {
+    float: right;
+    width: 860px;
+    height: 470px;
+    padding: top right bottom left;
+    /*margin-left: 10px;*/
+    padding: 10px;
+    /*overflow: hidden;*/
+    position: relative;
+    margin-bottom: 10px;
+    }
+    #bar_div {
+    float: left;
+    width: 500px;
+    height: 369px;
+    padding: 10px;
+    margin-left: 19px;
+    /*overflow: hidden;*/
+    position: relative;
+    margin-bottom: 10px;
+    }
+    #chord_div {
+    float: left;
+    width: 520px;
+    padding: 10px;
+    /*overflow: hidden;*/
+    position: relative;
+    }
+    #chord_svg{
+        width: 500px;
+        height: 500px;
+        padding-left: 25px;
+        padding-top: 25px;
+        background-color: white;
+        border: 1px solid black;
+        border-radius: 3px;
+    }
+    #sankey_div {
+    float: left;
+    width: 1030px;
+    padding: 10px;
+    margin-left: 20px;
+    /*overflow: hidden;*/
+    position: relative;
+    }
+    #beeswarm_div {
+    float: right;
+    width: 860px;
+    height: 369px;
+    padding: 10px;
+    /*overflow: hidden;*/
+    position: relative;
+    margin-bottom: 10px;
+    }
+    .node rect {
+    fill-opacity: .9;
+    shape-rendering: crispEdges;
+    }
+    .node text {
+    pointer-events: none;
+    text-shadow: 0 1px 0 #fff;
+    }
+    .link {
+    fill: none;
+    stroke: #000;
+    stroke-opacity: .2;
+    }
+    .link:hover {
+    stroke-opacity: .5;
+    }
+    .button {
+      background-color: brown;
+      border: none;
+      color: white;
+      padding: 6px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 14px;
+      margin: 4px 2px;
+    }
+    .button1 {
+      border-radius: 12px;
+    }
+    .Statistics {
+      width: 37%
+    }
+    .form-select{
+       overflow: hidden;
+       border-radius:0.5em;
+       box-shadow: 0 4px 6px -5px hsl(0, 0%, 40%), inset 0px 4px 6px -5px black;
+    }
+    .year-start{
+       overflow: hidden;
+       border-radius:0.5em;
+       box-shadow: 0 4px 6px -5px hsl(0, 0%, 40%), inset 0px 4px 6px -5px grey;
+    }
+    .year-end{
+       overflow: hidden;
+       border-radius:0.5em;
+       box-shadow: 0 4px 6px -5px hsl(0, 0%, 40%), inset 0px 4px 6px -5px grey;
+    }
+
+    .ribbon{
+      --f: 10px; /* control the folded part*/
+      --r: 15px; /* control the ribbon shape */
+      --t: 10px; /* the top offset */
+
+      position: absolute;
+      inset: var(--t) calc(-1*var(--f)) auto auto;
+      padding: 0 20px var(--f) calc(10px + var(--r));
+      clip-path:
+        polygon(0 0,100% 0,100% calc(100% - var(--f)),calc(100% - var(--f)) 100%,
+          calc(100% - var(--f)) calc(100% - var(--f)),0 calc(100% - var(--f)),
+          var(--r) calc(50% - var(--f)/2));
+      background: purple;
+      box-shadow: 0 calc(-1*var(--f)) 0 inset #0005;
+    }
+
+    .ribbon1{
+          --f: 10px; /* control the folded part*/
+          --r: 15px; /* control the ribbon shape */
+          --t: 10px; /* the top offset */
+
+          position: absolute;
+          inset: var(--t) calc(-1*var(--f)) auto auto;
+          padding: 0 20px var(--f) calc(10px + var(--r));
+          clip-path:
+            polygon(0 0,100% 0,100% calc(100% - var(--f)),calc(100% - var(--f)) 100%,
+              calc(100% - var(--f)) calc(100% - var(--f)),0 calc(100% - var(--f)),
+              var(--r) calc(50% - var(--f)/2));
+          background: deeppink;
+          box-shadow: 0 calc(-1*var(--f)) 0 inset #0005;
+        }
+
+    .ribbon2{
+          --f: 10px; /* control the folded part*/
+          --r: 15px; /* control the ribbon shape */
+          --t: 10px; /* the top offset */
+
+          position: absolute;
+          inset: var(--t) calc(-1*var(--f)) auto auto;
+          padding: 0 20px var(--f) calc(10px + var(--r));
+          clip-path:
+            polygon(0 0,100% 0,100% calc(100% - var(--f)),calc(100% - var(--f)) 100%,
+              calc(100% - var(--f)) calc(100% - var(--f)),0 calc(100% - var(--f)),
+              var(--r) calc(50% - var(--f)/2));
+          background: red;
+          box-shadow: 0 calc(-1*var(--f)) 0 inset #0005;
+        }
+
+    .ribbon3{
+          --f: 10px; /* control the folded part*/
+          --r: 15px; /* control the ribbon shape */
+          --t: 10px; /* the top offset */
+
+          position: absolute;
+          inset: var(--t) calc(-1*var(--f)) auto auto;
+          padding: 0 20px var(--f) calc(10px + var(--r));
+          clip-path:
+            polygon(0 0,100% 0,100% calc(100% - var(--f)),calc(100% - var(--f)) 100%,
+              calc(100% - var(--f)) calc(100% - var(--f)),0 calc(100% - var(--f)),
+              var(--r) calc(50% - var(--f)/2));
+          background: orange;
+          box-shadow: 0 calc(-1*var(--f)) 0 inset #0005;
+        }
+
+    .ribbon4{
+          --f: 10px; /* control the folded part*/
+          --r: 15px; /* control the ribbon shape */
+          --t: 10px; /* the top offset */
+
+          position: absolute;
+          inset: var(--t) calc(-1*var(--f)) auto auto;
+          padding: 0 20px var(--f) calc(10px + var(--r));
+          clip-path:
+            polygon(0 0,100% 0,100% calc(100% - var(--f)),calc(100% - var(--f)) 100%,
+              calc(100% - var(--f)) calc(100% - var(--f)),0 calc(100% - var(--f)),
+              var(--r) calc(50% - var(--f)/2));
+          background: green;
+          box-shadow: 0 calc(-1*var(--f)) 0 inset #0005;
+        }
+
+    .ribbon5{
+          --f: 10px; /* control the folded part*/
+          --r: 15px; /* control the ribbon shape */
+          --t: 10px; /* the top offset */
+
+          position: absolute;
+          inset: var(--t) calc(-1*var(--f)) auto auto;
+          padding: 0 20px var(--f) calc(10px + var(--r));
+          clip-path:
+            polygon(0 0,100% 0,100% calc(100% - var(--f)),calc(100% - var(--f)) 100%,
+              calc(100% - var(--f)) calc(100% - var(--f)),0 calc(100% - var(--f)),
+              var(--r) calc(50% - var(--f)/2));
+          background: black;
+          box-shadow: 0 calc(-1*var(--f)) 0 inset #0005;
+        }
+
+    .ribbon6{
+              --f: 10px; /* control the folded part*/
+              --r: 15px; /* control the ribbon shape */
+              --t: 10px; /* the top offset */
+
+              position: absolute;
+              inset: var(--t) calc(-1*var(--f)) auto auto;
+              padding: 0 20px var(--f) calc(10px + var(--r));
+              clip-path:
+                polygon(0 0,100% 0,100% calc(100% - var(--f)),calc(100% - var(--f)) 100%,
+                  calc(100% - var(--f)) calc(100% - var(--f)),0 calc(100% - var(--f)),
+                  var(--r) calc(50% - var(--f)/2));
+              background: gray;
+              box-shadow: 0 calc(-1*var(--f)) 0 inset #0005;
+            }
+
+    .ribbon7{
+              --f: 10px; /* control the folded part*/
+              --r: 15px; /* control the ribbon shape */
+              --t: 10px; /* the top offset */
+
+              position: absolute;
+              inset: var(--t) calc(-1*var(--f)) auto auto;
+              padding: 0 20px var(--f) calc(10px + var(--r));
+              clip-path:
+                polygon(0 0,100% 0,100% calc(100% - var(--f)),calc(100% - var(--f)) 100%,
+                  calc(100% - var(--f)) calc(100% - var(--f)),0 calc(100% - var(--f)),
+                  var(--r) calc(50% - var(--f)/2));
+              background: brown;
+              box-shadow: 0 calc(-1*var(--f)) 0 inset #0005;
+            }
+    body {
+        width:100%
+    }
+
+    .centered {
+        display: table;
+        margin: 20px auto;
+    }
+
+    .graph {
+        width: 50%;
+        margin: 0 auto;
+    }
+
+    #checkboxes > * {
+        font-size: 14px;
+        display: inline;
+        padding-top: 3px;
+    }
+
+    .measure-group {
+        display:inline;
+    }
+
+    .scale-group {
+        padding-left: 40px;
+        display:inline;
+    }
+
+    button 
+    {
+        margin:0 auto;
+        display:block;
+    }
+    /*svg 
+    {
+        background-color: white;
+    }*/
+
+    .cells path {
+        fill: none;
+        pointer-events: all;
+    }
+
+    /*div.tooltip {
+        position: absolute;
+        text-align: left;
+        color: white;
+        white-space: normal;
+        padding: 6px;
+        font-size: 14px;
+        background: rgb(96,125,139);
+        border: 1px solid rgb(96,125,139);
+        border-radius: 2px;
+        pointer-events: none;
+        cursor: none;
+    } */
+
+    .axis path,
+    .axis line {
+        fill: none;
+        stroke: rgb(96,125,139);
+        shape-rendering: crispEdges;
+    }
+
+    .axis text {
+        font: 10px sans-serif;
+    }
+
+    .legend {
+        fill: rgba(0,0,0,.87);
+    }
+
+    .article {
+        position: fixed;
+        top: 20px;
+        left: 15px;
+        font-size: 35px;
+        color: rgb(96,125,139);
+    }
+
+    .article-tt {
+        font-size: 14px;
+        background: rgb(96,125,139);
+        border: 1px solid rgb(96,125,139);
+        border-radius: 2px;
+        pointer-events: none;
+    }
+
+    .groups{
+    position: absolute;
+    top: 70px;
+    width: 140px;
+    right: 40px;}
+
+    #bee_svg
+    {
+        background-color: white;
+        border: 1px solid black;
+        border-radius: 3px;
+    }
+    .blink {
+      animation: blinker 1.6s linear infinite;
+      color: #1c87c9;
+      font-size: 30px;
+      font-weight: bold;
+      font-family: sans-serif;
+    }
+    @keyframes blinker {
+      50% {
+        opacity: 0;
+      }
+    }

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <link rel="icon" href="data:;base64,=">
+      <title>MiningVis</title>
+      <link
+         rel="stylesheet"
+         href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+         />
+      <script src="https://d3js.org/d3.v7.min.js"></script>
+      <!--<script src="https://d3js.org/d3.v4.min.js"></script>
+         <script src="https://cdn.jsdelivr.net/gh/holtzy/D3-graph-gallery@master/LIB/sankey.js"></script>-->
+      <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+      <script src="https://cdn.jsdelivr.net/npm/@observablehq/plot@0.6"></script>
+      <script
+         src="https://unpkg.com/d3-sankey@0.12.3/dist/d3-sankey.min.js"></script>
+      <script src="js/main.js"></script>
+      <link rel="stylesheet" href="css/master.css">
+      <link rel="stylesheet" href="css/tooltip.css">
+   </head>
+   <body>
+      <div id="tooltip" class="hidden">
+      </div>
+      <div id="chord_tooltip" class="hidden">
+      </div>
+      <div id="sankey_tooltip" class="hidden">
+      </div>
+      <div id="bar_tooltip" class="hidden">
+      </div>
+      <div class="myContainer">
+          </br>
+         <h1 class="text-center blink">Visual Analytics of the Bitcoin Mining Economy</h1>
+<!--
+         <h3 class="text-center">Akash-Daljit-Dhanraj-Prutha-Satyam-Shraddha</h3>
+-->
+         <hr/>
+         <!--<form name = MyForm class="border border-dark rounded p-2 mb-2 bg-light shadow-sm">
+            <label for="wordbox">Enter text here</label>
+            <textarea class="form-control mb-2 mt-1" id="wordbox" rows="8"></textarea>
+            <button type="button" class="btn btn-dark mb-1" onclick="submitText();">Submit text</button>
+            </form>-->
+         <div id="timeline_div" class="border border-dark rounded bg-light shadow-sm">
+             <!--<p style="font-weight:bold ; font-size: medium;" >Time Selection</p>-->
+             </br></br>
+             <div class="ribbon7" style="font-size: large; color: white;">Time Range and Statistics Selection&nbsp;</div>
+
+            <div class="Statistics" class="border border-dark rounded bg-light shadow-sm">
+               <!-- add your select here-->
+                <p style="font-weight:bold ; font-size: medium;" >Statistics</p>
+                <select class="form-select" id = "Stats" aria-label="Default select example" onchange="selectTimeline()">
+                   <option selected hidden>Select Stat</option>  
+                   <option selected value ="energy_price">Energy price index</option>
+                   <option value = "total_electricity">Total electricity consumption (GW)</option>    
+                   <option value="payout_per_hash">Mining profit per hash rate (USD)</option>
+                   <option value = "total_block">Total Blocks</option> 
+                   <option value="n_miners">Number of Mining Pools</option>
+                   <option value = "h_index">Mining concentration index</option> 
+                   <option value = "payout">Total Reward (BTC)</option> 
+                   <option value="block">Total Block Reward (BTC)</option>
+                   <option value = "fee">Total Transaction Fee (BTC)</option> 
+                   <option value = "payout_USD">Total Reward (USD)</option> 
+                   <option value="block_USD">Total Block Reward (USD)</option>
+                   <option value = "fee_USD">Total Transaction Fee (USD)</option> 
+                   <option value = "market-price">Market Price (USD)</option> 
+                   <option value="market-cap">Market Capitalization (USD)</option>
+                   <option value = "trade-volume">Trade Volume (USD)</option> 
+                   <option value = "hash-rate">Hash Rate (TH/s)</option> 
+                   <option value="difficulty">Difficulty</option>
+                   <option value = "avg-block-size">Avg Block Size (MB)</option>
+                   <option value="n-transactions-per-block">Avg #Transactions per Block</option>
+                   <option value = "median-confirmation-time">Median Confirmation Time (mins)</option>
+               </select>
+           </div>
+             </br>
+             <div class="year-range" class="border border-dark rounded bg-light shadow-sm">
+                 <p style="font-weight:bold ; font-size: medium;" >Year Range</p>
+                      Start:&nbsp;
+                      <input  class="year-start" type="text" id="startYear" value="2014">&nbsp;&nbsp;
+                      End:&nbsp;
+                      <input  class="year-end" type="text" id="endYear" value="2018">
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                     <button class="button button1" onclick="myYearRange()">Submit</button>
+             </div>
+             </br></br>
+             <!--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->
+            <svg id="timeline_svg" width="1510px" height="100px"
+               style="background-color: white;
+               border: 1px solid lightgray;
+               border-radius: 3px;"></svg>
+         </div>
+
+          <div id="universal_legend_div" class="border border-dark rounded bg-light shadow-sm" >
+             <!--<p style="font-weight:bold ; font-size: large;" > Select Pool</p>-->
+             </br></br>
+             <div class="ribbon6" style="font-size: large; color: white;">Legend&nbsp;</div>
+             <label style="font-weight:600"><input type="checkbox" id="selectall" name="pools" value="selectAll" onclick = "toggle(this)" checked />  Select All<br /></label>
+
+
+             <svg id="unilegend" height=600 width=450>
+
+             </svg>
+        </div>
+
+         <div id="stacked_bar_div" class="border border-dark rounded bg-light shadow-sm">
+             </br></br>
+             <div class="ribbon" style="font-size: large; color: white;">Stacked Bar Chart&nbsp;</div>
+            <!--Stacked Bar <span id="character-name">chart</span>-->
+            <svg id="stacked_bar_svg" width="480px" height="400px"
+               style="background-color: white;
+               border: 1px solid black;
+               border-radius: 3px;"></svg>
+         </div>
+
+         <div id="ribbon_div" class="border border-dark rounded ribbon_div bg-light shadow-sm">
+<!--             <h6 class="ribbon5">Ribbon Chart</h6>-->
+             <!--<p class="ribbon5" style="font-size: small;">Ribbon Chart</p>-->
+             </br></br>
+             <div class="ribbon1" style="font-size: large; color: white;">Ribbon Chart&nbsp;</div>
+             <div class="groups" class="border border-dark rounded bg-light shadow-sm">
+                 <!-- add your select here-->
+                 <p style="font-weight:bold ; font-size: medium;" >Groups</p>
+                 <select class="form-select" id = "groups" aria-label="Default select example" onchange="drawRibbonChart()">
+                     <option selected hidden>Select group</option>
+                     <option selected value ="reward">Reward</option>
+                     <option value = "size">Size</option>
+                 </select>
+             </div>
+<!--            <svg id="ribbon_svg" width="560px" height="300px"-->
+<!--               style="background-color: white;-->
+<!--               border: 1px solid lightgray;-->
+<!--               border-radius: 3px;"></svg>-->
+         </div>
+         <div id="bar_div" class="border border-dark rounded bg-light shadow-sm">
+             </br></br>
+             <div class="ribbon2" style="font-size: large; color: white;">Bar Chart&nbsp;</div>
+            <svg id="bar_svg" width="480px" height="299px"
+               style="background-color: white;
+               border: 1px solid black;
+               border-radius: 3px;"></svg>
+         </div>
+         <div id="beeswarm_div" class="border border-dark rounded bg-light shadow-sm">
+             </br>
+             <div class="ribbon3" style="font-size: large; color: white;">BeeSwarm Chart&nbsp;</div>
+           <!---- <svg id="beeswarm_svg" width="840px" height="299px"
+               style="background-color: white;
+               border: 1px solid black;
+               border-radius: 3px;"></svg> -->
+               <!--<svg id="beeswarm_svg" width="560px" height="255px"
+                     style="background-color: white;
+                     border: 1px solid lightgray;
+                     border-radius: 3px;"></svg>-->
+                        <div id="checkboxes" class="centered">
+         <span style="position:relative; top: 3px">Keywords:&nbsp;&nbsp;</span>
+         <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
+            <input type="checkbox" value="Bitcoin" class="mdl-checkbox__input continent" checked="">Bitcoin
+            <span class="mdl-checkbox__label" id="Bitcoin" style="font-size: 20px; color: #1976D2;">&#9679;&nbsp;&nbsp;</span>
+         </label>
+         <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
+            <input type="checkbox" value="Crypto" class="mdl-checkbox__input continent" checked="">Crypto
+            <span class="mdl-checkbox__label" id="Crypto" style="font-size: 20px; color: #388E3C;">&#9679;&nbsp;&nbsp;</span>
+         </label>
+         <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
+            <input type="checkbox" value="Invest" class="mdl-checkbox__input continent" checked="">Invest
+            <span class="mdl-checkbox__label" id="Invest" style="font-size: 20px; color: #E64A19;">&#9679;&nbsp;&nbsp;</span>
+         </label>
+         <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
+            <input type="checkbox" value="Miner" class="mdl-checkbox__input continent" checked="">Miner
+            <span class="mdl-checkbox__label" id="Miner" style="font-size: 20px; color: #050ce6;">&#9679;&nbsp;&nbsp;</span>
+         </label>
+         <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
+            <input type="checkbox" value="Bank" class="mdl-checkbox__input continent" checked="">Bank
+            <span class="mdl-checkbox__label" id="Bank" style="font-size: 20px; color: #FBC02D;">&#9679;&nbsp;&nbsp;</span>
+         </label>
+         </div>
+               </div>
+         <div id="chord_div" class="border border-dark rounded bg-light shadow-sm">
+             </br></br>
+             <div class="ribbon4" style="font-size: large; color: white;">Chord Chart&nbsp;</div>
+         </div>
+         <div id="sankey_div" class="border border-dark rounded bg-light shadow-sm">
+             </br></br>
+             <div class="ribbon5" style="font-size: large; color: white;">Sankey Chart&nbsp;</div>
+            <svg id="sankey_svg" width="1010px" height="500px"
+               style="background-color: white; padding: 50px;
+               border: 1px solid black;
+               border-radius: 3px;"></svg>
+         </div>
+      </div>
+      <!--<script>-->
+         <!--selectTimeline();-->
+      <!--</script>-->
+   </body>
+</html>
+

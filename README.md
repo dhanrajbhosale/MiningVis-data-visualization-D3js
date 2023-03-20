@@ -1,6 +1,8 @@
 # MiningVis-data-visualization-D3js
 We created a visual analytics tool to aid in the invesitigation of the history and statistics of the Bitcoin mining business.
 
+![visualization](https://github.com/dhanrajbhosale/MiningVis-data-visualization-D3js/blob/97ab814b3c21ea6faf943be7c75865f0ac691309/poster-1.png?raw=true)
+
 # Project - MiningVis
 Project Repository - MiningVis
 
